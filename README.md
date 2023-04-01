@@ -1,31 +1,41 @@
 # About
-This repository contains all my workspace templates, configurations, list of extensions and other tools I use on my projects. There are different branches to this repository. Each of them corresponds to differen workspaces. For example; The branch C++_Workspace, contains all the necessary information and stuff about my C++ projects and codes.
+Collection of multiple tools, configs and scripts I use for my daily work. \
+This repository is mainly for my own use, but feel free to use it as you wish. \
+There are multiple branches for different purposes, see below for more information.
 
-I use this repository to keep track of my configuration files and project structure templates across different machines. 
-
-Current branches and their purposes:
+## Branches
+Current branches and their purpose.
 ```
-|- main -> Contains system-wide config files such as rc files and automated bash scripts
-|- C_Workspace -> Basic C99 project template. I use this branch as a reference when writing C codes.
-|- C++_Workspace -> Basic C++20 project template. It has the same purpose as C_Workspace but for C++ projects.
-|- Python_Workspace -> Consists of a README.md file and some .vscode settings for my Python working environment.
-
+|- main -> Contains stuff like rc files, scripts, guides, etc.
+|- C_Workspace -> Basic C99 CMake project template.
+|- C++_Workspace -> Basic C++20 CMake project template.
 ```
 
-# Current Tools, Programs & Standards I Use
-C Standard == C99 \
-C++ Standard == C++20 \
-Python Version == 3.11 \
+## Directory Structure
+```
+|- /Scripts -> Scripts for different purposes.
+|---- lz_scripts.sh -> Functions for zsh.
+|---- start_ubuntu_server.sh -> Start Ubuntu Server 22.04 (On QEMU).
+|- /RC_Files -> RC/Profile files for different shells.
+|---- .zshrc -> For zsh.
+|---- .vimrc -> For VIM.
+|- /C_Examples -> C examples.
+|- /C++_Examples -> C++ examples.
+|- README.md -> This file.
+|- Install.sh -> Script for setting things up. (Linux & macOS only)
+```
+
+## Scripts
+Many shell commands require a lot of typing, so I created some scripts to make my life easier.
+These scripts are located under the `Scripts` directory. \
 \
-zsh == 5.8.1 \
-vim == 9.0.1 \
-cmake == 3.25.1 \
-VSCode == 1.74.2 \
-CLion == 2022.3.1 \
-QEMU == 7.1.0 
+Here is a list of all the functions.
+```bash
+lz_ip() # Print network interfaces and their IPv4 addresses.
+```
 
-# QEMU Emulation/Virtualization on Apple Silicons
-Below is couple of commands that installs QEMU and creates a Ubuntu Server 22.04.
+## QEMU Emulation/Virtualization on Apple Silicons
+Below is a couple of commands that installs QEMU and creates a Ubuntu Server 22.04.
 
 TODO: Better description & guide \
 TODO: Add more start scripts \
@@ -49,31 +59,5 @@ $ qemu-img -f qcow2 disk.qcow2 16G
 # https://rpmfind.net/linux/rpm2html/search.php?query=edk2-aarch64
 
 # Start the server using the bash script
-$ ./start_ubuntu_server.sh
+$ ./Scripts/start_ubuntu_server.sh
 ```
-
-
-# Visual Studio Code Extensions
-Here are the VSCode extensions I use as of 25 January 2023.
-
-## General
-Remote Development by Microsoft == v0.23.0 \
-Live Share by Microsoft == v1.0.5788 \
-SQLite Viewer by Florian Klampfer == v0.1.5 \
-shellman by Remisa == v5.6.0 \
-ShellCheck by Timon Wong == v0.29.2 \
-Markdown All in One by Yu Zhang == v3.5.0 \
-vscode-icons-mac by Wayou Liu == v7.25.3
-
-## For C/C++
-CMake by twxs == v0.0.17 \
-CMake Tools by Microsoft == v1.13.41 \
-C/C++ by Microsoft == v1.13.8 \
-Makefile Tools by Microsoft == v0.6.0
-
-## For Python
-Python by Microsoft == v2022.20.1 \
-autoDocstring - Python Docstring Generator == v0.6.1
-
-## For HTML, CSS & JavaScript
-Prettier - Code formatter by Prettier == v9.10.3

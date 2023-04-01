@@ -11,7 +11,6 @@ gpgconf --launch gpg-agent
 
 # Alias: exa-ls
 alias ls='exa' # ls
-alias l='exa -lbF --git' # list, size, type, git
 alias ll='exa -lbGF --git' # long list
 alias la='exa -lha --time-style=iso --git --color-scale' # all list
 alias lx='exa -lha@ --time-style=iso --git --color-scale' # all + extended list
