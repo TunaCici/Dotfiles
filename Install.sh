@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 # Description: Initialize the OS by installing the required packages. \
 #              The default package manager is 'apt'. \
