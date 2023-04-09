@@ -5,7 +5,6 @@ export CLICOLOR=1
 # Initialization: VSCode
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
-fi
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   export PATH="/usr/share/code/bin:$PATH"
 fi

@@ -96,6 +96,21 @@ function install_httpie() {
     fi
 }
 
+function install_vim() {
+    if [ -x "$(command -v vim)" ]; then
+        print_msg "vim already installed." "x"
+        return
+    fi
+
+    if [ "$PKG_MGR" == "apt" ]; then
+        sudo apt install vim
+    elif [ "$PKG_MGR" == "pacman" ]; then
+        sudo pacman -S vim
+    elif [ "$PKG_MGR" == "yum" ]; then
+        sudo yum install vim
+    fi
+}
+
 function install_zsh() {
     if [ -x "$(command -v zsh)" ]; then
         print_msg "zsh already installed." "x"
@@ -103,11 +118,11 @@ function install_zsh() {
     fi
 
     if [ "$PKG_MGR" == "apt" ]; then
-        sudo apt install zsh
+        sudo apt install zsh zsh-syntax-highlighting
     elif [ "$PKG_MGR" == "pacman" ]; then
-        sudo pacman -S zsh
+        sudo pacman -S zsh zsh-syntax-highlighting
     elif [ "$PKG_MGR" == "yum" ]; then
-        sudo yum install zsh
+        sudo yum install zsh zsh-syntax-highlighting
     fi
 }
 
@@ -165,6 +180,7 @@ print_msg "Package lists updated." "x"
 print_msg "Installing packages..." "*"
 install_exa
 install_httpie
+install_vim
 install_zsh
 
 # 4. Test packages.
@@ -179,6 +195,13 @@ if [ -x "$(command -v http)" ]; then
     print_msg "httpie installed successfully." "x"
 else
     print_msg "httpie installation failed." "*"
+    exit 1
+fi
+
+if [ -x "$(command -v vim)" ]; then
+    print_msg "vim installed successfully." "x"
+else
+    print_msg "vim installation failed." "*"
     exit 1
 fi
 
