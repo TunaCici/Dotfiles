@@ -6,11 +6,6 @@
 
 PKG_MGR="UNKNOWN"
 
-# Function that prints to console (colord if possible) a msg and a symbol inside [] brackets.
-# If symbol is x make it green, if symbol is * make it yellow, if symbol is ! make it red.
-# Does not uses any external dependencies. Use ASCII symbols.
-# Also print timestamp. HH:MM:SS
-# Usage: print_msg "msg" "symbol"
 function print_msg() {
     local msg="$1"
     local symbol="$2"
@@ -149,7 +144,7 @@ function change_shell() {
     fi
 
     if [ -x "$(command -v chsh)" ]; then
-        sudo chsh -s "$(command -v zsh)"
+        sudo chsh $(whoami) --shell "$(command -v zsh)"
     else
         print_msg "chsh not found. You need to change shell manually." "*"
         print_msg "Tip: You can edit /etc/passwd." "x"
