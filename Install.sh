@@ -118,11 +118,11 @@ function install_zsh() {
     fi
 
     if [ "$PKG_MGR" == "apt" ]; then
-        sudo apt install zsh zsh-syntax-highlighting
+        sudo apt install zsh zsh-syntax-highlighting zsh-autosuggestions
     elif [ "$PKG_MGR" == "pacman" ]; then
-        sudo pacman -S zsh zsh-syntax-highlighting
+        sudo pacman -S zsh zsh-syntax-highlighting zsh-autosuggestions
     elif [ "$PKG_MGR" == "yum" ]; then
-        sudo yum install zsh zsh-syntax-highlighting
+        sudo yum install zsh zsh-syntax-highlighting zsh-autosuggestions
     fi
 }
 
