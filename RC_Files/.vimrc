@@ -9,6 +9,3 @@ set autoindent
 set smartindent
 set termguicolors
 
-nnoremap <Leader>cc :set colorcolumn=80<cr>
-nnoremap <Leader>ncc :set colorcolumn-=80<cr>
-

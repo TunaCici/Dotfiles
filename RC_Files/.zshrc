@@ -3,11 +3,17 @@ PS1="%F{green}%n%f%F{green}@%f%F{green}%m%f:%F{magenta}%~%f$ "
 export CLICOLOR=1
 
 # Initialization: VSCode
-code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
+fi
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  export PATH="/usr/share/code/bin:$PATH"
+fi
 
 # Initialization: GPG
-export GPG_TTY=$(tty)
-gpgconf --launch gpg-agent
+if ! gpgconf --list-dirs agent-socket >/dev/null 2>&1; then
+  gpgconf --launch gpg-agent
+fi
 
 # Alias: exa-ls
 alias ls='exa' # ls
@@ -19,4 +25,8 @@ alias ltt='exa --tree --level=2' # tree
 alias lttt='exa --tree --level=3' # tree
 
 # Extension: zsh-syntax-highlighting
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
