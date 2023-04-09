@@ -16,9 +16,9 @@ fi
 
 # Alias: exa-ls
 alias ls='exa' # ls
-alias ll='exa -lbGF --git' # long list
-alias la='exa -lha --time-style=iso --git --color-scale' # all list
-alias lx='exa -lha@ --time-style=iso --git --color-scale' # all + extended list
+alias ll='exa -lbGF' # long list
+alias la='exa -lha --time-style=iso --color-scale' # all list
+alias lx='exa -lha@ --time-style=iso --color-scale' # all + extended list
 alias lt='exa --tree --level=1' # tree
 alias ltt='exa --tree --level=2' # tree
 alias lttt='exa --tree --level=3' # tree
