@@ -149,7 +149,7 @@ function change_shell() {
     fi
 
     if [ -x "$(command -v chsh)" ]; then
-        chsh -s "$(command -v zsh)"
+        sudo chsh -s "$(command -v zsh)"
     else
         print_msg "chsh not found. You need to change shell manually." "*"
         print_msg "Tip: You can edit /etc/passwd." "x"
