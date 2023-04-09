@@ -133,11 +133,11 @@ function setup_dot_files() {
         print_msg ".vimrc already exists." "*"
         read -r -p "Overwrite? [y/N]: " overwrite
         if [ "$overwrite" == "y" ]; then
-            cp ./RC_Files/.zshrc "$HOME"
+            cp ./RC_Files/.vimrc "$HOME"
             print_msg "Overwrote .vimrc to $HOME" "x"
         fi
     else
-        cp ./RC_Files/.zshrc "$HOME"
+        cp ./RC_Files/.vimrc "$HOME"
         print_msg "Copied .vimrc to $HOME" "x"
     fi
 }
