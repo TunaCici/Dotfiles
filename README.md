@@ -3,24 +3,14 @@ Collection of multiple tools, configs and scripts I use for my daily work. \
 This repository is mainly for my own use, but feel free to use it as you wish. \
 There are multiple branches for different purposes, see below for more information.
 
-## Branches
-Current branches and their purpose.
-```
-|- main -> Contains stuff like rc files, scripts, guides, etc.
-|- C_Workspace -> Basic C99 CMake project template.
-|- C++_Workspace -> Basic C++20 CMake project template.
-```
-
 ## Directory Structure
 ```
 |- /Scripts -> Scripts for different purposes.
-|---- lz_scripts.sh -> Functions for zsh.
+|---- scripts.sh -> Functions for zsh.
 |---- start_ubuntu_server.sh -> Start Ubuntu Server 22.04 (On QEMU).
 |- /RC_Files -> RC/Profile files for different shells.
 |---- .zshrc -> For zsh.
 |---- .vimrc -> For VIM.
-|- /C_Examples -> C examples.
-|- /C++_Examples -> C++ examples.
 |- README.md -> This file.
 |- Install.sh -> Script for setting things up. (Linux & macOS only)
 ```
