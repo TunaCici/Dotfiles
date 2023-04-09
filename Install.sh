@@ -6,12 +6,12 @@
 
 PKG_MGR="UNKNOWN"
 
-function lz_err_pck_mgr() {
-    echo "[LZ_ERR]: Package manager not found." >&2
+function err_pck_mgr() {
+    echo "[x]: Package manager not found." >&2
     exit 1
 }
 
-function lz_set_pck_mgr() {
+function set_pck_mgr() {
     if [ -x "$(command -v apt)" ]; then
         PKG_MGR="apt"
     elif [ -x "$(command -v pacman)" ]; then
@@ -19,11 +19,11 @@ function lz_set_pck_mgr() {
     elif [ -x "$(command -v yum)" ]; then
         PKG_MGR="yum"
     else
-        lz_err_pck_mgr
+        err_pck_mgr
     fi
 }
 
-function lz_update_pck_lst() {
+function update_pck_lst() {
     if [ "$PKG_MGR" == "apt" ]; then
         sudo apt update
     elif [ "$PKG_MGR" == "pacman" ]; then
@@ -31,11 +31,11 @@ function lz_update_pck_lst() {
     elif [ "$PKG_MGR" == "yum" ]; then
         sudo yum update
     else
-        lz_err_pck_mgr
+        err_pck_mgr
     fi
 }
 
-function lz_install_exa() {
+function install_exa() {
     if [ "$PKG_MGR" == "apt" ]; then
         sudo apt install exa -y
     elif [ "$PKG_MGR" == "pacman" ]; then
@@ -43,11 +43,11 @@ function lz_install_exa() {
     elif [ "$PKG_MGR" == "yum" ]; then
         sudo yum install exa -y
     else
-        lz_err_pck_mgr
+        err_pck_mgr
     fi
 }
 
-function lz_install_httpie() {
+function install_httpie() {
     if [ "$PKG_MGR" == "apt" ]; then
         sudo apt install httpie
     elif [ "$PKG_MGR" == "pacman" ]; then
@@ -55,31 +55,37 @@ function lz_install_httpie() {
     elif [ "$PKG_MGR" == "yum" ]; then
         sudo yum install httpie
     else
-        lz_err_pck_mgr
+        err_pck_mgr
     fi
 }
 
 # 1. Set package manager.
-lz_set_pck_mgr
+echo "[*] Checking for available package managers"
+set_pck_mgr
+echo "[x] Package manager set to: ${PKG_MGR}"
 
 # 2. Update upstream package lists.
-lz_update_pck_lst
+echo "[*] Updating upstream package list"
+update_pck_lst
+echo "[x] Updated upstream package list"
 
 # 3. Install packages.
-lz_install_exa
-lz_install_httpie
+echo "[*] Installing exa and httpie"
+install_exa
+install_httpie
 
 # 4. Test packages.
 if [ -x "$(command -v exa)" ]; then
-    echo "[LZ]: exa installed successfully."
+    echo "[x]: exa installed successfully."
 else
-    echo "[LZ_ERR]: exa installation failed." >&2
+    echo "[x]: exa installation failed." >&2
     exit 1
 fi
 
 if [ -x "$(command -v http)" ]; then
-    echo "[LZ]: httpie installed successfully."
+    echo "[x]: httpie installed successfully."
 else
-    echo "[LZ_ERR]: httpie installation failed." >&2
+    echo "[x]: httpie installation failed." >&2
     exit 1
 fi
+
