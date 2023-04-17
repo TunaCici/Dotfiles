@@ -14,6 +14,9 @@ if ! gpgconf --list-dirs agent-socket >/dev/null 2>&1; then
   gpgconf --launch gpg-agent
 fi
 
+GPG_TTY=$(tty)
+export GPG_TTY
+
 # Alias: exa-ls
 alias ls='exa' # ls
 alias ll='exa -lbGF' # long list
@@ -28,4 +31,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# Extension: zsh-autosuggestions
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
