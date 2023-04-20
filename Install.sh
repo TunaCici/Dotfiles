@@ -14,11 +14,11 @@ function print_msg() {
     printf "[%s] " "$timestamp"
     
     if [ "$symbol" == "x" ]; then
-        printf "[\e[32m%s\e[0m] %s\n" "$symbol" "$msg"
+        printf "[\e[32m%s\e[0m] %s\n" "OK" "$msg"
     elif [ "$symbol" == "*" ]; then
-        printf "[\e[33m%s\e[0m] %s\n" "$symbol" "$msg"
+        printf "[\e[33m%s\e[0m] %s\n" "ACTION" "$msg"
     elif [ "$symbol" == "!" ]; then
-        printf "[\e[31m%s\e[0m] %s\n" "$symbol" "$msg"
+        printf "[\e[31m%s\e[0m] %s\n" "ERROR" "$msg"
     else
         printf "[%s] %s\n" "$symbol" "$msg" 2> stderr
     fi
