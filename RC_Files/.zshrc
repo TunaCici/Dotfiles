@@ -1,3 +1,6 @@
+# Basics
+autoload -U compinit; compinit
+
 # Customization: prompt
 PS1="%F{green}%n%f%F{green}@%f%F{green}%m%f:%F{magenta}%~%f$ "
 export CLICOLOR=1
