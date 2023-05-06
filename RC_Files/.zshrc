@@ -2,7 +2,15 @@
 autoload -U compinit; compinit
 
 # Customization: prompt
-PS1="%F{green}%n%f%F{green}@%f%F{green}%m%f:%F{magenta}%~%f$ "
+MYHOST=""
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  MYHOST="$(networksetup -getcomputername)"
+  MYHOST=${MYHOST// /-}
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  MYHOST="$(hostname)"
+fi
+
+PS1="%F{green}%n%f%F{green}@%f%F{green}${MYHOST}%f:%F{magenta}%~%f$ "
 export CLICOLOR=1
 
 # Initialization: VSCode
@@ -21,13 +29,12 @@ GPG_TTY=$(tty)
 export GPG_TTY
 
 # Alias: exa-ls
-alias ls='exa' # ls
-alias ll='exa -lbGF' # long list
-alias la='exa -lha --time-style=iso --color-scale' # all list
-alias lx='exa -lha@ --time-style=iso --color-scale' # all + extended list
-alias lt='exa --tree --level=1' # tree
-alias ltt='exa --tree --level=2' # tree
-alias lttt='exa --tree --level=3' # tree
+alias ls="exa"
+alias ll="exa --long --header --classify"
+alias la="exa --long --header --classify --all"
+alias lt="exa --tree --level=1"
+alias ltt="exa --tree --level=2"
+alias lttt="exa --tree --level=3"
 
 # Extension: zsh-syntax-highlighting
 if [[ "$OSTYPE" == "darwin"* ]]; then
