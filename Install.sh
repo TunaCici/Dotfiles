@@ -34,12 +34,12 @@ function print_msg {
     fi
 } 
 
-function err_pck_mgr {
+function err_pkg_mgr {
     print_msg "Unknown package manager." "!"
     exit 1
 }
 
-function set_pck_mgr {
+function set_pkg_mgr {
     # Check OSTYPE and package manager
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         if [ -x "$(command -v apt)" ]; then
@@ -56,11 +56,11 @@ function set_pck_mgr {
     fi
 
     if [ "$PKG_MGR" == "UNKNOWN" ]; then
-        err_pck_mgr
+        err_pkg_mgr
     fi
 }
 
-function update_pck_lst {
+function update_pkg_lst {
     if [ "$PKG_MGR" == "apt" ]; then
         sudo apt update
     elif [ "$PKG_MGR" == "pacman" ]; then
@@ -95,70 +95,6 @@ function verify_cmd {
     else
         print_msg "$1 installation failed." "*"
         exit 1
-    fi
-}
-
-function install_exa {
-    if [ -x "$(command -v exa)" ]; then
-        print_msg "exa already installed." "x"
-        return
-    fi
-
-    if [ "$PKG_MGR" == "apt" ]; then
-        sudo apt install exa -y
-    elif [ "$PKG_MGR" == "pacman" ]; then
-        sudo pacman -S exa --noconfirm
-    elif [ "$PKG_MGR" == "yum" ]; then
-        sudo yum install exa -y
-    elif [ "$PKG_MGR" == "brew" ]; then
-        brew install exa
-    fi
-}
-
-function install_httpie {
-    if [ -x "$(command -v http)" ]; then
-        print_msg "httpie already installed." "x"
-        return
-    fi
-
-    if [ "$PKG_MGR" == "apt" ]; then
-        sudo apt install httpie
-    elif [ "$PKG_MGR" == "pacman" ]; then
-        sudo pacman -S httpie
-    elif [ "$PKG_MGR" == "yum" ]; then
-        sudo yum install httpie
-    elif [ "$PKG_MGR" == "brew" ]; then
-        brew install httpie
-    fi
-}
-
-function install_vim {
-    if [ -x "$(command -v vim)" ]; then
-        print_msg "vim already installed." "x"
-        return
-    fi
-
-    if [ "$PKG_MGR" == "apt" ]; then
-        sudo apt install vim
-    elif [ "$PKG_MGR" == "pacman" ]; then
-        sudo pacman -S vim
-    elif [ "$PKG_MGR" == "yum" ]; then
-        sudo yum install vim
-    fi
-}
-
-function install_zsh {
-    if [ -x "$(command -v zsh)" ]; then
-        print_msg "zsh already installed." "x"
-        return
-    fi
-
-    if [ "$PKG_MGR" == "apt" ]; then
-        sudo apt install zsh zsh-syntax-highlighting zsh-autosuggestions
-    elif [ "$PKG_MGR" == "pacman" ]; then
-        sudo pacman -S zsh zsh-syntax-highlighting zsh-autosuggestions
-    elif [ "$PKG_MGR" == "yum" ]; then
-        sudo yum install zsh zsh-syntax-highlighting zsh-autosuggestions
     fi
 }
 
@@ -204,12 +140,12 @@ function change_shell {
 
 # 1. Set package manager.
 print_msg "Setting package manager..." "*"
-set_pck_mgr
+set_pkg_mgr
 print_msg "Package manager set to $PKG_MGR." "x"
 
 # 2. Update upstream package lists.
 print_msg "Updating package lists..." "*"
-update_pck_lst
+update_pkg_lst
 print_msg "Package lists updated." "x"
 
 # 3. Install packages.
