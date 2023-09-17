@@ -10,6 +10,7 @@ packages="\
     exa \
     httpie \
     vim \
+    neovim \
     zsh \
     zsh-syntax-highlighting \
     zsh-autosuggestions \

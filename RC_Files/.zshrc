@@ -28,13 +28,17 @@ fi
 GPG_TTY=$(tty)
 export GPG_TTY
 
-# Alias: exa-ls
+# Alias: ls <-> exa
 alias ls="exa"
 alias ll="exa --long --header --classify"
 alias la="exa --long --header --classify --all"
 alias lt="exa --tree --level=1"
 alias ltt="exa --tree --level=2"
 alias lttt="exa --tree --level=3"
+
+# Alias: nvim <-> neovim
+alias vi="neovim"
+alias nvim="neovim"
 
 # Extension: zsh-syntax-highlighting
 if [[ "$OSTYPE" == "darwin"* ]]; then
