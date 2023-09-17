@@ -6,7 +6,17 @@
 
 PKG_MGR="UNKNOWN"
 
-function print_msg() {
+packages="\
+    exa \
+    httpie \
+    vim \
+    zsh \
+    zsh-syntax-highlighting \
+    zsh-autosuggestions \
+"
+
+
+function print_msg {
     local msg="$1"
     local symbol="$2"
     local timestamp=$(date +"%T")
@@ -24,12 +34,12 @@ function print_msg() {
     fi
 } 
 
-function err_pck_mgr() {
+function err_pck_mgr {
     print_msg "Unknown package manager." "!"
     exit 1
 }
 
-function set_pck_mgr() {
+function set_pck_mgr {
     # Check OSTYPE and package manager
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         if [ -x "$(command -v apt)" ]; then
@@ -50,7 +60,7 @@ function set_pck_mgr() {
     fi
 }
 
-function update_pck_lst() {
+function update_pck_lst {
     if [ "$PKG_MGR" == "apt" ]; then
         sudo apt update
     elif [ "$PKG_MGR" == "pacman" ]; then
@@ -62,7 +72,33 @@ function update_pck_lst() {
     fi
 }
 
-function install_exa() {
+function install_pkg {
+    if [ -x "$(command -v "$1")" ]; then
+        print_msg "$1 already installed." "x"
+        return
+    fi
+
+    if [ "$PKG_MGR" == "apt" ]; then
+        sudo apt install "$1" -y
+    elif [ "$PKG_MGR" == "pacman" ]; then
+        sudo pacman -S "$1" --noconfirm
+    elif [ "$PKG_MGR" == "yum" ]; then
+        sudo yum install "$1" -y
+    elif [ "$PKG_MGR" == "brew" ]; then
+        brew install "$1"
+    fi
+}
+
+function verify_cmd {
+    if [ -x "$(command -v "$1")" ]; then
+        print_msg "$1 installed successfully." "x"
+    else
+        print_msg "$1 installation failed." "*"
+        exit 1
+    fi
+}
+
+function install_exa {
     if [ -x "$(command -v exa)" ]; then
         print_msg "exa already installed." "x"
         return
@@ -79,7 +115,7 @@ function install_exa() {
     fi
 }
 
-function install_httpie() {
+function install_httpie {
     if [ -x "$(command -v http)" ]; then
         print_msg "httpie already installed." "x"
         return
@@ -96,7 +132,7 @@ function install_httpie() {
     fi
 }
 
-function install_vim() {
+function install_vim {
     if [ -x "$(command -v vim)" ]; then
         print_msg "vim already installed." "x"
         return
@@ -111,7 +147,7 @@ function install_vim() {
     fi
 }
 
-function install_zsh() {
+function install_zsh {
     if [ -x "$(command -v zsh)" ]; then
         print_msg "zsh already installed." "x"
         return
@@ -126,7 +162,7 @@ function install_zsh() {
     fi
 }
 
-function setup_dot_files() {
+function setup_dot_files {
     if [[ -f "$HOME/.zshrc" ]]; then
         print_msg ".zshrc already exists." "*"
         read -r -p "Overwrite? [y/N]: " overwrite
@@ -152,14 +188,14 @@ function setup_dot_files() {
     fi
 }
 
-function change_shell() {
+function change_shell {
     if [ "$SHELL" == "$(command -v zsh)" ]; then
         print_msg "Default shell already set to zsh." "x"
         return
     fi
 
     if [ -x "$(command -v chsh)" ]; then
-        sudo chsh $(whoami) --shell "$(command -v zsh)"
+        sudo chsh "$(whoami)" --shell "$(command -v zsh)"
     else
         print_msg "chsh not found. You need to change shell manually." "*"
         print_msg "Tip: You can edit /etc/passwd." "x"
@@ -178,39 +214,15 @@ print_msg "Package lists updated." "x"
 
 # 3. Install packages.
 print_msg "Installing packages..." "*"
-install_exa
-install_httpie
-install_vim
-install_zsh
+for i in $packages; do
+    install_pkg "$i"
+done
 
 # 4. Test packages.
-if [ -x "$(command -v exa)" ]; then
-    print_msg "exa installed successfully." "x"
-else
-    print_msg "exa installation failed." "*"
-    exit 1
-fi
-
-if [ -x "$(command -v http)" ]; then
-    print_msg "httpie installed successfully." "x"
-else
-    print_msg "httpie installation failed." "*"
-    exit 1
-fi
-
-if [ -x "$(command -v vim)" ]; then
-    print_msg "vim installed successfully." "x"
-else
-    print_msg "vim installation failed." "*"
-    exit 1
-fi
-
-if [ -x "$(command -v zsh)" ]; then
-    print_msg "zsh installed successfully." "x"
-else
-    print_msg "zsh installation failed." "*"
-    exit 1
-fi
+verify_cmd exa
+verify_cmd http
+verify_cmd vim
+verify_cmd zsh
 
 # 5. Setup dotfiles
 print_msg "Setting up dotfiles..." "*"
