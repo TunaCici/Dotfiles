@@ -37,8 +37,14 @@ alias ltt="exa --tree --level=2"
 alias lttt="exa --tree --level=3"
 
 # Alias: nvim <-> neovim
-alias vi="neovim"
-alias nvim="neovim"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  alias vi="nvim"
+  alias neovim="nvim"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  alias vi="neovim"
+  alias nvim="neovim"
+fi
+
 
 # Extension: zsh-syntax-highlighting
 if [[ "$OSTYPE" == "darwin"* ]]; then
